@@ -27,6 +27,5 @@
 @secondary-low-zoom-casing: #f0dd54;
 @secondary-low-zoom: #f0dd54;
 @secondary-fill: #f0dd54;
-
 @secondary-casing: #000000;
 @secondary-shield: #000000;
