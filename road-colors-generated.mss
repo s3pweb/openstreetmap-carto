@@ -4,23 +4,24 @@
 /*                                                                   */
 /*   ./scripts/generate_road_colours.py > road-colors-generated.mss  */
 /*                                                                   */
-@motorway-low-zoom-casing: #c24e6b;
+@motorway-low-zoom-casing: #1202fa;
 @trunk-low-zoom-casing: #cf6649;
 @primary-low-zoom-casing: #c38a27;
 @secondary-low-zoom-casing: #9eae23;
+
 @motorway-casing: #dc2a67;
 @trunk-casing: #c84e2f;
 @primary-casing: #a06b00;
 @secondary-casing: #707d05;
-@motorway-shield: #620728;
+@motorway-shield: #ffffff;
 @trunk-shield: #5d1b0b;
 @primary-shield: #4c2e00;
 @secondary-shield: #323b00;
-@motorway-low-zoom: #e66e89;
+@motorway-low-zoom: #1202fa;
 @trunk-low-zoom: #f5977a;
 @primary-low-zoom: #f3c380;
 @secondary-low-zoom: #e8eda0;
-@motorway-fill: #e892a2;
+@motorway-fill: #e93f33;
 @trunk-fill: #f9b29c;
-@primary-fill: #fcd6a4;
-@secondary-fill: #f7fabf;
+@primary-fill: #e93f33;
+@secondary-fill: #fee533;
