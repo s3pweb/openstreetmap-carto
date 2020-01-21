@@ -3121,19 +3121,10 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [highway = 'construction'][construction = 'trunk'],
   [highway = 'construction'][construction = 'primary'] {
 
-    [highway = 'motorway'] {
-      text-fill: white;
-    }
-
-    [highway != 'motorway'] {
-      text-fill: black;
-    }
-    
-
     [zoom >= 13] {
       text-name: "[name]";
       text-size: 8;
-      /*text-fill: black;*/
+      text-fill: black;
       text-spacing: 300;
       text-clip: false;
       text-placement: line;
