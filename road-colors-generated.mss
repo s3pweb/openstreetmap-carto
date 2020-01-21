@@ -10,16 +10,16 @@
 @motorway-casing: #ffffff;
 @motorway-shield: #ffffff;
 
-@trunk-low-zoom-casing: #cf6649;
-@trunk-low-zoom: #f5977a;
-@trunk-fill: #f9b29c;
-@trunk-shield: #5d1b0b;
-@trunk-casing: #c84e2f;
+@trunk-low-zoom-casing: #e93f33;
+@trunk-low-zoom: #e93f33;
+@trunk-fill: #e93f33;
+@trunk-shield: #ffffff;
+@trunk-casing: #ffffff;
 
 
-@primary-low-zoom-casing: #e93f33;
-@primary-low-zoom: #e93f33;
-@primary-fill: #e93f33;
+@primary-low-zoom-casing: #e97f33;
+@primary-low-zoom: #e97f33;
+@primary-fill: #e97f33;
 @primary-casing: #ffffff;
 @primary-shield: #ffffff;
 
