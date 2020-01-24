@@ -1466,10 +1466,13 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
 
     [feature = 'highway_primary'] {
-      [zoom >= 8][link != 'yes'],
+      [zoom >= 6][link != 'yes'],
       [zoom >= 10] {
-        line-width: @primary-width-z8;
+        line-width: @primary-width-z6;
         line-color: @primary-low-zoom;
+        [zoom >= 6] { line-width: @primary-width-z6; }
+        [zoom >= 7] { line-width: @primary-width-z7; }
+        [zoom >= 8] { line-width: @primary-width-z8; }
         [zoom >= 9] { line-width: @primary-width-z9; }
         [zoom >= 10] { line-width: @primary-width-z10; }
         [zoom >= 11] { line-width: @primary-width-z11; }
