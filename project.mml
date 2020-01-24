@@ -54,35 +54,7 @@ Stylesheet:
   - admin.mss
   - addressing.mss
 Layer:
-  - id: landcover-low-zoom
-    geometry: polygon
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way, way_pixels,
-            COALESCE(wetland, landuse, "natural") AS feature
-          FROM (SELECT
-              way,
-              ('landuse_' || (CASE WHEN landuse IN ('forest', 'farmland', 'residential', 'commercial', 'retail', 'industrial',
-                                                    'meadow', 'grass', 'village_green', 'vineyard', 'orchard') THEN landuse ELSE NULL END)) AS landuse,
-              ('natural_' || (CASE WHEN "natural" IN ('wood', 'sand', 'scree', 'shingle', 'bare_rock', 'heath', 'grassland', 'scrub') THEN "natural" ELSE NULL END)) AS "natural",
-              ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'mud') THEN (CASE WHEN "natural" IN ('mud') THEN "natural" ELSE tags->'wetland' END) ELSE NULL END)) AS wetland,
-              way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
-              way_area
-            FROM planet_osm_polygon
-            WHERE (landuse IN ('forest', 'farmland', 'residential', 'commercial', 'retail', 'industrial', 'meadow', 'grass', 'village_green', 'vineyard', 'orchard')
-              OR "natural" IN ('wood', 'wetland', 'mud', 'sand', 'scree', 'shingle', 'bare_rock', 'heath', 'grassland', 'scrub'))
-              AND way_area > 0.01*!pixel_width!::real*!pixel_height!::real
-              AND building IS NULL
-          ) AS features
-          ORDER BY way_area DESC, feature
-        ) AS landcover_low_zoom
-    properties:
-      cache-features: true
-      minzoom: 5
-      maxzoom: 9
+
   - id: landcover
     geometry: polygon
     <<: *extents
@@ -179,24 +151,6 @@ Layer:
         ) AS water_lines_casing
     properties:
       minzoom: 13
-  - id: water-lines-low-zoom
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            waterway,
-            CASE WHEN tags->'intermittent' IN ('yes')
-              OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
-              THEN 'yes' ELSE 'no' END AS int_intermittent
-          FROM planet_osm_line
-          WHERE waterway = 'river'
-        ) AS water_lines_low_zoom
-    properties:
-      minzoom: 8
-      maxzoom: 11
   - id: water-lines
     class: water-lines
     geometry: linestring
@@ -559,7 +513,7 @@ Layer:
             AND building IS NULL
         ) AS landuse_overlay
     properties:
-      minzoom: 8
+      minzoom: 10
   - id: tourism-boundary
     geometry: polygon
     <<: *extents
@@ -1135,20 +1089,6 @@ Layer:
         ) AS power_minorline
     properties:
       minzoom: 16
-  - id: power-line
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way
-          FROM planet_osm_line
-          WHERE power = 'line'
-            OR (power = 'cable' AND tags->'location' IN ('overground', 'overhead', 'surface', 'outdoor', 'platform'))
-        ) AS power_line
-    properties:
-      minzoom: 14
   - id: trees
     geometry: polygon
     <<: *extents
@@ -1594,26 +1534,6 @@ Layer:
         ) AS amenity_line
     properties:
       minzoom: 16
-  - id: power-towers
-    geometry: point
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            power
-        FROM planet_osm_point
-        WHERE power IN ('tower', 'pole')
-        ORDER BY
-          CASE
-            WHEN power = 'tower' THEN 1
-            WHEN power = 'pole' THEN 2
-            ELSE NULL
-          END
-        ) AS power_towers
-    properties:
-      minzoom: 14
   - id: roads-text-ref-low-zoom
     geometry: linestring
     <<: *extents
