@@ -4,9 +4,9 @@
 /*                                                                   */
 /*   ./scripts/generate_road_colours.py > road-colors-generated.mss  */
 /*                                                                   */
-@motorway-low-zoom-casing: #3030fe;
-@motorway-low-zoom: #3030fe;
-@motorway-fill: #3030fe;
+@motorway-low-zoom-casing: #457abf;
+@motorway-low-zoom: #457abf;
+@motorway-fill: #457abf;
 @motorway-casing: #ffffff;
 @motorway-shield: #ffffff;
 
