@@ -62,9 +62,11 @@
 
 @motorway-width-z6:               1.4;
 @trunk-width-z6:                  1.0;
+@primary-width-z6:                1.0;
 
 @motorway-width-z7:               1.4;
 @trunk-width-z7:                  1.0;
+@primary-width-z7:                1.0;
 
 @motorway-width-z8:               1.4;
 @trunk-width-z8:                  1.2;
@@ -1150,6 +1152,8 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
         [zoom >= 11] { line-width: @trunk-width-z11 + 2 * @lowzoom-halo-width; }
       }
       [feature = 'highway_primary'] {
+         [zoom >= 6] { line-width: @primary-width-z6 + 2 * @lowzoom-halo-width; }
+        [zoom >= 7] { line-width: @primary-width-z7 + 2 * @lowzoom-halo-width; }
         [zoom >= 8] { line-width: @primary-width-z8 + 2 * @lowzoom-halo-width; }
         [zoom >= 9] { line-width: @primary-width-z9 + 2 * @lowzoom-halo-width; }
         [zoom >= 10] { line-width: @primary-width-z10 + 2 * @lowzoom-halo-width; }
