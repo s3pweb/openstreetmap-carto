@@ -1415,8 +1415,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
     }
 
     [feature = 'highway_trunk'] {
-      [zoom >= 6][link != 'yes'],
-      [zoom >= 10] {
+      [zoom >= 6] {
         line-width: @trunk-width-z6;
         line-color: @trunk-low-zoom;
         [zoom >= 7] { line-width: @trunk-width-z7; }
