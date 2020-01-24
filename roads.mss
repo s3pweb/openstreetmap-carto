@@ -60,28 +60,28 @@
 @residential-tunnel-fill: darken(@residential-fill, 5%);
 @living-street-tunnel-fill: lighten(@living-street-fill, 3%);
 
-@motorway-width-z6:               0.4;
-@trunk-width-z6:                  0.4;
+@motorway-width-z6:               1.4;
+@trunk-width-z6:                  1.0;
 
-@motorway-width-z7:               0.8;
-@trunk-width-z7:                  0.6;
+@motorway-width-z7:               1.4;
+@trunk-width-z7:                  1.0;
 
-@motorway-width-z8:               1;
-@trunk-width-z8:                  1;
+@motorway-width-z8:               1.4;
+@trunk-width-z8:                  1.2;
 @primary-width-z8:                1;
 
-@motorway-width-z9:               1.4;
+@motorway-width-z9:               1.9;
 @trunk-width-z9:                  1.4;
 @primary-width-z9:                1.4;
 @secondary-width-z9:              1;
 
-@motorway-width-z10:              1.9;
+@motorway-width-z10:              2.2;
 @trunk-width-z10:                 1.9;
 @primary-width-z10:               1.8;
 @secondary-width-z10:             1.1;
 @tertiary-width-z10:              0.7;
 
-@motorway-width-z11:              2.0;
+@motorway-width-z11:              2.5;
 @trunk-width-z11:                 1.9;
 @primary-width-z11:               1.8;
 @secondary-width-z11:             1.1;
