@@ -29,6 +29,8 @@ _parts:
     srs-name: "WGS84"
     srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
   osm2pgsql: &osm2pgsql
+    host: "ots_pg"
+    password: "renderer"
     type: "postgis"
     dbname: "gis"
     key_field: ""
