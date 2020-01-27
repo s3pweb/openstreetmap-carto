@@ -66,7 +66,7 @@
 }
 
 #capital-names {
-  [zoom >= 4][zoom < 8][population > 600000],
+  [zoom >= 4][zoom < 8][population > 100000],
   [zoom >= 5][zoom < 8] {
     shield-file: url('symbols/place/place-capital-6.svg');
     shield-text-dx: 6;
@@ -131,8 +131,8 @@
 
 #placenames-medium::high-importance {
   [category = 1][zoom < 14] {
-    [zoom >= 4][zoom < 5][score >= 3000000],
-    [zoom >= 5][zoom < 8][score >= 400000] {
+    [zoom >= 4][zoom < 5][score >= 300000],
+    [zoom >= 5][zoom < 8][score >= 100000] {
       shield-file: url('symbols/place/place-4.svg');
       shield-text-dx: 4;
       shield-text-dy: 4;
@@ -263,7 +263,7 @@
 
 #placenames-medium::low-importance {
   [category = 2] {
-    [zoom >= 9][zoom < 16] {
+    [zoom >= 8][zoom < 16] {
       text-name: "[name]";
       text-size: 10;
       text-fill: @placenames;
@@ -296,7 +296,7 @@
 }
 
 #placenames-small::suburb {
-  [place = 'suburb'][zoom >= 12][zoom < 17] {
+  [place = 'suburb'][zoom >= 10][zoom < 17] {
     text-name: "[name]";
     text-size: 11;
     text-fill: @placenames;
@@ -331,7 +331,7 @@
 
 #placenames-small::village {
   [place = 'village'] {
-    [zoom >= 12][zoom < 17] {
+    [zoom >= 11][zoom < 17] {
       text-name: "[name]";
       text-size: 10;
       text-fill: @placenames;
