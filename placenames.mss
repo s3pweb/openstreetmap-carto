@@ -331,7 +331,7 @@
 
 #placenames-small::village {
   [place = 'village'] {
-    [zoom >= 11][zoom < 17] {
+    [zoom >= 10][zoom < 17] {
       text-name: "[name]";
       text-size: 10;
       text-fill: @placenames;
