@@ -1250,7 +1250,7 @@ Layer:
         ) AS placenames_small
     properties:
       cache-features: true
-      minzoom: 12
+      minzoom: 10
   - id: stations
     geometry: point
     <<: *extents
