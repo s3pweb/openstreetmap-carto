@@ -298,7 +298,7 @@
 #placenames-small::suburb {
   [place = 'suburb'][zoom >= 10][zoom < 17] {
     text-name: "[name]";
-    text-size: 11;
+    text-size: 9;
     text-fill: @placenames;
     text-face-name: @book-fonts;
     text-halo-fill: @standard-halo-fill;
@@ -306,7 +306,7 @@
     text-wrap-width: 55; // 5.0 em
     text-line-spacing: -0.55; // -0.05 em
     text-margin: 7.7; // 0.7 em
-    [zoom >= 13] {
+    [zoom >= 12] {
       text-size: 12;
       text-wrap-width: 60; // 5.0 em
       text-line-spacing: -0.60; // -0.05 em
