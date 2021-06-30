@@ -1,12 +1,12 @@
 // --- Parks, woods, other green things ---
 
-@grass: #cdebb0;        // Lch(90,32,128) also grassland, meadow, village_green, garden, allotments
-@scrub: #c8d7ab;        // Lch(84,24,122)
-@forest: #add19e;       // Lch(80,30,135)
-@forest-text: #46673b;  // Lch(40,30,135)
-@park: #c8facc;         // Lch(94,30,145)
-@allotments: #c9e1bf;   // Lch(87,20,135)
-@orchard: #aedfa3; // also vineyard, plant_nursery
+@grass: #e8efe8;        // Lch(90,32,128) also grassland, meadow, village_green, garden, allotments
+@scrub: #e8efe8;        // Lch(84,24,122)
+@forest: #e8efe8;       // Lch(80,30,135)
+@forest-text: #b3d6a7;  // Lch(40,30,135)
+@park: #e8efe8;         // Lch(94,30,145)
+@allotments: #e8efe8;   // Lch(87,20,135)
+@orchard: #e8efe8; // also vineyard, plant_nursery
 @hedge: @forest;       // Lch(80,30,135)
 
 // --- "Base" landuses ---
@@ -41,7 +41,7 @@
 
 @bare_ground: #eee5dc;
 @campsite: #def6c0; // also caravan_site, picnic_site
-@cemetery: #aacbaf; // also grave_yard
+@cemetery: #e8efe8; // also grave_yard
 @construction: #c7c7b4; // also brownfield
 @heath: #d6d99f;
 @mud: rgba(203,177,154,0.3); // produces #e6dcd1 over @land
@@ -63,10 +63,10 @@
 
 // --- Sports ---
 
-@pitch: #aae0cb;           // Lch(85,22,168) also track
+@pitch: #e8efe8;           // Lch(85,22,168) also track
 @track: @pitch;
 @stadium: @leisure; // also sports_centre
-@golf_course: #b5e3b5;
+@golf_course: #e8efe8;
 
 #landcover-low-zoom[zoom < 10],
 #landcover[zoom >= 10] {

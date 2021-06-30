@@ -89,7 +89,7 @@
 }
 
 #capital-names {
-  [zoom >= 4][zoom < 8][population > 600000],
+  [zoom >= 4][zoom < 8][population > 100000],
   [zoom >= 5][zoom < 8] {
     shield-file: url('symbols/place/place-capital-6.svg');
     shield-text-dx: 6;
@@ -154,8 +154,8 @@
 
 #placenames-medium::high-importance {
   [category = 1][zoom < 14] {
-    [zoom >= 4][zoom < 5][score >= 3000000],
-    [zoom >= 5][zoom < 8][score >= 400000] {
+    [zoom >= 4][zoom < 5][score >= 300000],
+    [zoom >= 5][zoom < 8][score >= 100000] {
       shield-file: url('symbols/place/place-4.svg');
       shield-text-dx: 4;
       shield-text-dy: 4;
@@ -286,7 +286,7 @@
 
 #placenames-medium::low-importance {
   [category = 2] {
-    [zoom >= 9][zoom < 16] {
+    [zoom >= 8][zoom < 16] {
       text-name: "[name]";
       text-size: 10;
       text-fill: @placenames;
@@ -319,9 +319,9 @@
 }
 
 #placenames-small::suburb {
-  [place = 'suburb'][zoom >= 12][zoom < 17] {
+  [place = 'suburb'][zoom >= 10][zoom < 17] {
     text-name: "[name]";
-    text-size: 11;
+    text-size: 9;
     text-fill: @placenames;
     text-face-name: @book-fonts;
     text-halo-fill: @standard-halo-fill;
@@ -329,7 +329,7 @@
     text-wrap-width: 55; // 5.0 em
     text-line-spacing: -0.55; // -0.05 em
     text-margin: 7.7; // 0.7 em
-    [zoom >= 13] {
+    [zoom >= 12] {
       text-size: 12;
       text-wrap-width: 60; // 5.0 em
       text-line-spacing: -0.60; // -0.05 em
@@ -354,7 +354,7 @@
 
 #placenames-small::village {
   [place = 'village'] {
-    [zoom >= 12][zoom < 17] {
+    [zoom >= 10][zoom < 17] {
       text-name: "[name]";
       text-size: 10;
       text-fill: @placenames;

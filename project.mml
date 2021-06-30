@@ -25,6 +25,8 @@ _parts:
     srs-name: "900913"
     srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
   osm2pgsql: &osm2pgsql
+    host: "ots_pg"
+    password: "renderer"
     type: "postgis"
     dbname: "gis"
     key_field: ""
@@ -50,35 +52,6 @@ Stylesheet:
   - style/admin.mss
   - style/addressing.mss
 Layer:
-  - id: landcover-low-zoom
-    geometry: polygon
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way, way_pixels,
-            COALESCE(wetland, landuse, "natural") AS feature
-          FROM (SELECT
-              way,
-              ('landuse_' || (CASE WHEN landuse IN ('forest', 'farmland', 'residential', 'commercial', 'retail', 'industrial',
-                                                    'meadow', 'grass', 'village_green', 'vineyard', 'orchard') THEN landuse END)) AS landuse,
-              ('natural_' || (CASE WHEN "natural" IN ('wood', 'sand', 'scree', 'shingle', 'bare_rock', 'heath', 'grassland', 'scrub') THEN "natural" END)) AS "natural",
-              ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'mud') THEN (CASE WHEN "natural" IN ('mud') THEN "natural" ELSE tags->'wetland' END) END)) AS wetland,
-              way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels,
-              way_area
-            FROM planet_osm_polygon
-            WHERE (landuse IN ('forest', 'farmland', 'residential', 'commercial', 'retail', 'industrial', 'meadow', 'grass', 'village_green', 'vineyard', 'orchard')
-              OR "natural" IN ('wood', 'wetland', 'mud', 'sand', 'scree', 'shingle', 'bare_rock', 'heath', 'grassland', 'scrub'))
-              AND way_area > 0.01*!pixel_width!::real*!pixel_height!::real
-              AND building IS NULL
-          ) AS features
-          ORDER BY way_area DESC, feature
-        ) AS landcover_low_zoom
-    properties:
-      cache-features: true
-      minzoom: 5
-      maxzoom: 9
   - id: landcover
     geometry: polygon
     <<: *extents
@@ -181,24 +154,6 @@ Layer:
         ) AS water_lines_casing
     properties:
       minzoom: 13
-  - id: water-lines-low-zoom
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            waterway,
-            CASE WHEN tags->'intermittent' IN ('yes')
-              OR tags->'seasonal' IN ('yes', 'spring', 'summer', 'autumn', 'winter', 'wet_season', 'dry_season')
-              THEN 'yes' ELSE 'no' END AS int_intermittent
-          FROM planet_osm_line
-          WHERE waterway = 'river'
-        ) AS water_lines_low_zoom
-    properties:
-      minzoom: 8
-      maxzoom: 11
   - id: water-lines
     geometry: linestring
     <<: *extents
@@ -538,7 +493,7 @@ Layer:
             AND building IS NULL
         ) AS landuse_overlay
     properties:
-      minzoom: 8
+      minzoom: 10
   - id: tourism-boundary
     geometry: polygon
     <<: *extents
@@ -1123,40 +1078,6 @@ Layer:
         ) AS power_minorline
     properties:
       minzoom: 16
-  - id: power-line
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way
-          FROM planet_osm_line
-          WHERE power = 'line'
-        ) AS power_line
-    properties:
-      minzoom: 14
-  - id: protected-areas
-    geometry: polygon
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            boundary,
-            tags->'protect_class' AS protect_class,
-            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
-          FROM planet_osm_polygon
-          WHERE (boundary IN ('aboriginal_lands', 'national_park')
-                 OR leisure = 'nature_reserve'
-                 OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6')))
-            AND building IS NULL
-            AND way_area > 1*!pixel_width!::real*!pixel_height!::real
-        ) AS protected_areas
-    properties:
-      cache-features: true
-      minzoom: 8
   - id: trees
     geometry: polygon
     <<: *extents
@@ -1319,7 +1240,7 @@ Layer:
         ) AS placenames_small
     properties:
       cache-features: true
-      minzoom: 12
+      minzoom: 10
   - id: stations
     geometry: point
     <<: *extents
@@ -1683,25 +1604,6 @@ Layer:
         ) AS amenity_line
     properties:
       minzoom: 16
-  - id: power-towers
-    geometry: point
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            power
-        FROM planet_osm_point
-        WHERE power IN ('tower', 'pole')
-        ORDER BY
-          CASE power
-            WHEN 'tower' THEN 2
-            WHEN 'pole' THEN 1
-          END DESC
-        ) AS power_towers
-    properties:
-      minzoom: 14
   - id: roads-text-ref-low-zoom
     geometry: linestring
     <<: *extents
@@ -2169,26 +2071,6 @@ Layer:
         ) AS admin_text
     properties:
       minzoom: 11
-  - id: protected-areas-text
-    geometry: linestring
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            name,
-            boundary,
-            tags->'protect_class' AS protect_class,
-            way_area/NULLIF(POW(!scale_denominator!*0.001*0.28,2),0) AS way_pixels
-          FROM planet_osm_polygon
-          WHERE (boundary IN ('aboriginal_lands', 'national_park')
-                 OR leisure = 'nature_reserve'
-                 OR (boundary = 'protected_area' AND tags->'protect_class' IN ('1','1a','1b','2','3','4','5','6')))
-            AND name IS NOT NULL
-        ) AS protected_areas_text
-    properties:
-      minzoom: 13
   - id: amenity-low-priority
     geometry: point
     <<: *extents
